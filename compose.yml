@@ -1,0 +1,27 @@
+services:
+  node:
+    image: node-prisma
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgresql://real:realworld-pwd@db:5432/real
+      JWT_SECRET: theSecretForCreatingTheJWT
+      NODE_ENV: development
+    volumes:
+      - ./src:/home/node/app/src
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15.2
+    environment:
+      POSTGRES_PASSWORD: 'realworld-pwd'
+      POSTGRES_USER: 'real'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
