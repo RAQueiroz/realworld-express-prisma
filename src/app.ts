@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import usersRouter from "./routes/api/users";
 import userRouter from "./routes/api/user";
 import profilesRouter from "./routes/api/profiles";
@@ -25,7 +25,7 @@ app.use("/api/articles", articlesRouter);
 
 app.use("/api/tags", tagsRouter);
 
-app.get("/", function (_req, res) {
+app.get("/", function(_req: Request, res: Response) {
   return res.send("This is just the backend for RealWorld");
 });
 
